@@ -1,24 +1,25 @@
 import { useEffect, useState } from 'react';
 import { Book } from './types/book';
 
-
 function BookList() {
   const [books, setBooks] = useState<Book[]>([]);
   const [pageSize, setPageSize] = useState<number>(5);
   const [pageNum, setPageNum] = useState<number>(1);
   const [totalItems, setTotalItems] = useState<number>(0);
   const [totalPages, setTotalPages] = useState<number>(0);
+  const [sortByTitle, setSortByTitle] = useState(false);
 
   useEffect(() => {
     const fetchBooks = async () => {
-      const response = await fetch(`http://localhost:5121/books/allbooks?pageHowMany=${pageSize}&pageNum=${pageNum}`
+      const response = await fetch(
+        `http://localhost:5121/books/allbooks?pageHowMany=${pageSize}&pageNum=${pageNum}&sortBy=${sortByTitle}`
       );
       const data = await response.json();
       setBooks(data.books);
       setTotalItems(data.totalNumBooks);
     };
     fetchBooks();
-  }, [pageSize, pageNum, totalItems]);
+  }, [pageSize, pageNum, totalItems, sortByTitle]);
 
   useEffect(() => {
     setTotalPages(Math.ceil(totalItems / pageSize));
@@ -27,6 +28,15 @@ function BookList() {
   return (
     <>
       <h1>Books</h1>
+      <br />
+      <label>
+        <input
+          type="checkbox"
+          checked={sortByTitle}
+          onChange={(e) => setSortByTitle(e.target.checked)}
+        />
+        Sort Alphabetically
+      </label>
       <br />
       {books.map((b) => (
         <div id="bookCard" className="card" key={b.bookId}>

@@ -131,3 +131,4 @@
 /Users/macyeskelsen/Desktop/mission11/backend/BooksAPI/BooksAPI/obj/Debug/net8.0/BooksAPI.pdb
 /Users/macyeskelsen/Desktop/mission11/backend/BooksAPI/BooksAPI/obj/Debug/net8.0/BooksAPI.genruntimeconfig.cache
 /Users/macyeskelsen/Desktop/mission11/backend/BooksAPI/BooksAPI/obj/Debug/net8.0/ref/BooksAPI.dll
+/Users/macyeskelsen/Desktop/mission11/backend/BooksAPI/BooksAPI/obj/Debug/net8.0/BooksAPI.sourcelink.json
