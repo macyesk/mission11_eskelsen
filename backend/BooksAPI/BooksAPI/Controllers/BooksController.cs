@@ -15,16 +15,23 @@ public class BooksController : ControllerBase
     }
 
     [HttpGet("AllBooks")]
-    public IActionResult GetAllBooks(int pageHowMany = 5, int pageNum = 1, bool sortBy = false)
+    public IActionResult GetAllBooks(int pageHowMany = 5, int pageNum = 1, bool sortBy = false, [FromQuery] List<string>? categories = null)
     {
-        var result = _context.Books.Skip((pageNum - 1) * pageHowMany).Take(pageHowMany).ToList();
-        
+        var query = _context.Books.AsQueryable();
+
+        if (categories != null && categories.Any())
+        {
+            query = query.Where(b => categories.Contains(b.Category));
+        }
+
+        var totalNumBooks = query.Count(); // Correct total count before pagination
+
         if (sortBy)
         {
-            result = _context.Books.OrderBy(b => b.Title).Skip((pageNum - 1) * pageHowMany).Take(pageHowMany).ToList();
+            query = query.OrderBy(b => b.Title);
         }
-        
-        var totalNumBooks = _context.Books.Count();
+
+        var result = query.Skip((pageNum - 1) * pageHowMany).Take(pageHowMany).ToList();
 
         var pageInfo = new
         {
@@ -34,6 +41,14 @@ public class BooksController : ControllerBase
 
         return Ok(pageInfo);
     }
+
     
+    [HttpGet("GetProjectTypes")]
+    public IActionResult GetProjectTypes()
+    {
+        var projectTypes = _context.Books.Select(p => p.Category).Distinct().ToList();
+            
+        return Ok(projectTypes);
+    }
     
 }

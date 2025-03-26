@@ -1,29 +1,34 @@
 import { useEffect, useState } from 'react';
 import { Book } from '../types/Book';
+import { useNavigate } from 'react-router-dom';
+import { CartItem } from '../types/CartItem';
 
-function BookList() {
+function BookList({ selectedCategories }: { selectedCategories: string[] }) {
   const [books, setBooks] = useState<Book[]>([]);
   const [pageSize, setPageSize] = useState<number>(5);
   const [pageNum, setPageNum] = useState<number>(1);
   const [totalItems, setTotalItems] = useState<number>(0);
   const [totalPages, setTotalPages] = useState<number>(0);
   const [sortByTitle, setSortByTitle] = useState(false);
-
+  const navigate = useNavigate();
   useEffect(() => {
     const fetchBooks = async () => {
+      const categoryParams = selectedCategories
+        .map((cat) => `categories=${encodeURIComponent(cat)}`)
+        .join('&');
       const response = await fetch(
-        `http://localhost:5121/books/allbooks?pageHowMany=${pageSize}&pageNum=${pageNum}&sortBy=${sortByTitle}`
+        `http://localhost:5121/books/allbooks?pageHowMany=${pageSize}&pageNum=${pageNum}&sortBy=${sortByTitle}${selectedCategories.length ? `&${categoryParams}` : ''}`
       );
       const data = await response.json();
       setBooks(data.books);
       setTotalItems(data.totalNumBooks);
     };
     fetchBooks();
-  }, [pageSize, pageNum, totalItems, sortByTitle]);
+  }, [pageSize, pageNum, totalItems, sortByTitle, selectedCategories]);
 
   useEffect(() => {
     setTotalPages(Math.ceil(totalItems / pageSize));
-  }, [totalItems, pageSize]);
+  }, [totalItems, pageSize, selectedCategories]);
 
   return (
     <>
@@ -65,6 +70,14 @@ function BookList() {
                 <strong>Price:</strong> {b.price}
               </li>
             </ul>
+            <button
+              className="btn btn-dark"
+              onClick={() => {
+                navigate(`/addToCart/${b.title}/${b.bookId}/${b.price}`);
+              }}
+            >
+              Add To Cart
+            </button>
           </div>
         </div>
       ))}
@@ -112,3 +125,6 @@ function BookList() {
 }
 
 export default BookList;
+function addToCart(newItem: CartItem) {
+  throw new Error('Function not implemented.');
+}
