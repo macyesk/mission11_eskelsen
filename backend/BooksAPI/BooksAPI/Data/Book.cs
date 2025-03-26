@@ -21,5 +21,5 @@ public class Book
     [Required]
     public int PageCount { get; set; }
     [Required]
-    public int Price { get; set; }
+    public double Price { get; set; }
 }
