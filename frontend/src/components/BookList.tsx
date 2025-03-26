@@ -32,7 +32,7 @@ function BookList({ selectedCategories }: { selectedCategories: string[] }) {
 
   return (
     <>
-      <h1>Books</h1>
+
       <br />
       <label>
         <input

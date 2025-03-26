@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import { useLayoutEffect } from 'react';
 import { CartItem } from '../types/CartItem';
+import WelcomeBand from '../components/WelcomeBand';
 
 function CartPage() {
   const navigate = useNavigate();
@@ -10,6 +11,7 @@ function CartPage() {
 
   return (
     <>
+      <WelcomeBand />
       <div>
         <h2>Your Cart</h2>
         <div>
@@ -19,7 +21,8 @@ function CartPage() {
             <ul>
               {cart.map((item: CartItem) => (
                 <li key={item.bookId}>
-                  {item.title} : ${item.price.toFixed(2)}
+                  {item.title} Quantity: {item.quantity} Subtotal: $
+                  {item.price.toFixed(2)}
                   <button
                     onClick={() => removeFromCart(item.bookId)}
                     className="btn"
@@ -32,8 +35,8 @@ function CartPage() {
           )}
         </div>
         <h3>Total: ${totalAmount.toFixed(2)}</h3>
-        <button>Checkout</button>
-        <button onClick={() => navigate('/projects')}>Continue Browsing</button>
+        <button className="btn btn-light"onClick={() => navigate('/books')}>Continue Browsing</button>
+        <button className="btn btn-success">Checkout</button>
       </div>
     </>
   );

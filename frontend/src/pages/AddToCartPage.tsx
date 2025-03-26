@@ -2,6 +2,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import { useState } from 'react';
 import { CartItem } from '../types/CartItem';
+import WelcomeBand from '../components/WelcomeBand';
 
 function AddToCartPage() {
   const navigate = useNavigate();
@@ -13,12 +14,14 @@ function AddToCartPage() {
       bookId: Number(bookId),
       title: title || 'No Book Found',
       price: Number(price),
+      quantity: 1,
     };
     addToCart(newItem);
     navigate('/cart');
   };
   return (
     <>
+      <WelcomeBand />
       <h2>Adding {title} to Cart</h2>
       <h5>${Number(price).toFixed(2)}</h5>
       <div>
