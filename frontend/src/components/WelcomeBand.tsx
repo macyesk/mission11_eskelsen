@@ -1,12 +1,19 @@
-function WelcomeBand(){
+import { useNavigate } from 'react-router-dom';
+
+function WelcomeBand() {
+  const navigate = useNavigate();
   return (
     <>
-      <div className="row bg-warning text-gray">
-        <h1>Books</h1>
-      </div>
+      <nav className="navbar bg-warning">
+        <div className="container-fluid">
+          <a className="navbar-brand" onClick={() => navigate('/books')}>
+            Books
+          </a>
+        </div>
+      </nav>
+      <br />
     </>
   );
-
 }
 
 export default WelcomeBand;

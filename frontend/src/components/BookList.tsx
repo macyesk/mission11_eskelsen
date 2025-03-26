@@ -32,7 +32,6 @@ function BookList({ selectedCategories }: { selectedCategories: string[] }) {
 
   return (
     <>
-
       <br />
       <label>
         <input
@@ -82,28 +81,34 @@ function BookList({ selectedCategories }: { selectedCategories: string[] }) {
         </div>
       ))}
 
-      <button disabled={pageNum === 1} onClick={() => setPageNum(pageNum - 1)}>
-        Previous
-      </button>
-
-      {Array(totalPages)
-        .fill(null)
-        .map((_, index) => (
-          <button
-            key={index + 1}
-            onClick={() => setPageNum(index + 1)}
-            disabled={pageNum === index + 1}
-          >
-            {index + 1}
+      <ul className="pagination justify-content-center">
+        <li className={`page-item ${pageNum === 1 ? 'disabled' : ''}`}>
+          <button className="page-link" onClick={() => setPageNum(pageNum - 1)}>
+            Previous
           </button>
-        ))}
+        </li>
 
-      <button
-        disabled={pageNum === totalPages}
-        onClick={() => setPageNum(pageNum + 1)}
-      >
-        Next
-      </button>
+        {Array(totalPages)
+          .fill(null)
+          .map((_, index) => (
+            <li
+              className={`page-item ${pageNum === index + 1 ? 'disabled' : ''}`}
+            >
+              <button
+                key={index + 1}
+                onClick={() => setPageNum(index + 1)}
+                className="page-link"
+              >
+                {index + 1}
+              </button>
+            </li>
+          ))}
+        <li className={`page-item ${pageNum === totalPages ? 'disabled' : ''}`}>
+          <button onClick={() => setPageNum(pageNum + 1)} className="page-link">
+            Next
+          </button>
+        </li>
+      </ul>
 
       <br />
       <label>

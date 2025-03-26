@@ -2,11 +2,13 @@ import { useState } from 'react';
 import BookList from '../components/BookList';
 import CategoryFilter from '../components/CategoryFilter';
 import WelcomeBand from '../components/WelcomeBand';
+import CartSummary from '../components/CartSummary';
 
 function BooksPage() {
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   return (
     <>
+      <CartSummary />
       <WelcomeBand />
       <div className="container">
         <div className="row">
