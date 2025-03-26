@@ -80,7 +80,7 @@ function BookList({ selectedCategories }: { selectedCategories: string[] }) {
           </div>
         </div>
       ))}
-
+      <br />
       <ul className="pagination justify-content-center">
         <li className={`page-item ${pageNum === 1 ? 'disabled' : ''}`}>
           <button className="page-link" onClick={() => setPageNum(pageNum - 1)}>
