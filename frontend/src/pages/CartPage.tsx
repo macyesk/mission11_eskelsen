@@ -1,6 +1,5 @@
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
-import { useLayoutEffect } from 'react';
 import { CartItem } from '../types/CartItem';
 import WelcomeBand from '../components/WelcomeBand';
 

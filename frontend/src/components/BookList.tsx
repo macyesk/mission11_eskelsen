@@ -130,6 +130,3 @@ function BookList({ selectedCategories }: { selectedCategories: string[] }) {
 }
 
 export default BookList;
-function addToCart(newItem: CartItem) {
-  throw new Error('Function not implemented.');
-}

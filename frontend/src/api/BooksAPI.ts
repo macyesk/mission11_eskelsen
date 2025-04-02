@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { Book } from '../types/Book';
 
 interface FetchBooksResponse {
