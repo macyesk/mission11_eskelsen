@@ -31,8 +31,8 @@ function BookList({ selectedCategories }: { selectedCategories: string[] }) {
       } finally {
         setLoading(false);
       }
-      loadBooks();
     };
+    loadBooks();
   }, [pageSize, pageNum, totalItems, sortByTitle, selectedCategories]);
 
   useEffect(() => {
