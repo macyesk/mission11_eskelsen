@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { Book } from '../types/Book';
 
-interface FetchProjectsResponse {
+interface FetchBooksResponse {
   books: Book[];
-  totalNumberBooks: number;
+  totalNumBooks: number;
 }
 
 const API_URL = 'http://localhost:5121/books';
@@ -13,7 +13,7 @@ export const fetchBooks = async (
   pageNum: number,
   selectedCategories: string[],
   sortByTitle: boolean
-): Promise<FetchProjectsResponse> => {
+): Promise<FetchBooksResponse> => {
   sortByTitle = false;
   try {
     const categoryParams = selectedCategories
@@ -30,6 +30,7 @@ export const fetchBooks = async (
     if (!response.ok) {
       throw new Error('Failed to fetch books');
     }
+
     return await response.json();
   } catch (error) {
     console.error('Error fetching books:', error);
