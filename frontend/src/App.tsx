@@ -14,8 +14,11 @@ function App() {
         <Router>
           <Routes>
             <Route path="/" element={<BooksPage />} />
-            <Route path="/books
-            " element={<BooksPage />} />
+            <Route
+              path="/books
+            "
+              element={<BooksPage />}
+            />
             <Route
               path="/addToCart/:title/:bookId/:price"
               element={<AddToCartPage />}
