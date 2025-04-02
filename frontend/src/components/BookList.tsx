@@ -39,6 +39,9 @@ function BookList({ selectedCategories }: { selectedCategories: string[] }) {
     setTotalPages(Math.ceil(totalItems / pageSize));
   }, [totalItems, pageSize, selectedCategories]);
 
+  if (loading) return <p>Loading projects...</p>;
+  if (error) return <p className="text-red-500">Error: {error}</p>;
+
   return (
     <>
       <br />
