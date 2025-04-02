@@ -26,7 +26,7 @@ function AddToCartPage() {
       <div className="container">
         <div className="row">
           <div className="col-4">
-            <button className="btn btn-dark" onClick={() => navigate('/books')}>
+            <button className="btn btn-dark" onClick={() => navigate('/')}>
               Go Back
             </button>
           </div>
