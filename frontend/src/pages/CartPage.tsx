@@ -37,10 +37,7 @@ function CartPage() {
         <div className="container">
           <div className="row">
             <div className="col-6">
-              <button
-                className="btn btn-light"
-                onClick={() => navigate('/books')}
-              >
+              <button className="btn btn-light" onClick={() => navigate('/')}>
                 Continue Browsing
               </button>
             </div>
