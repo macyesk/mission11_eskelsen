@@ -8,7 +8,7 @@ interface FetchProjectsResponse {
 
 const API_URL = 'http://localhost:5121/books';
 
-export const fetchProjects = async (
+export const fetchBooks = async (
   pageSize: number,
   pageNum: number,
   selectedCategories: string[],
