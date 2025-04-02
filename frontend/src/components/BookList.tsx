@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Book } from '../types/Book';
 import { useNavigate } from 'react-router-dom';
+import { fetchBooks } from '../api/BooksAPI';
 
 function BookList({ selectedCategories }: { selectedCategories: string[] }) {
   const [books, setBooks] = useState<Book[]>([]);
@@ -10,19 +11,28 @@ function BookList({ selectedCategories }: { selectedCategories: string[] }) {
   const [totalPages, setTotalPages] = useState<number>(0);
   const [sortByTitle, setSortByTitle] = useState(false);
   const navigate = useNavigate();
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
-    const fetchBooks = async () => {
-      const categoryParams = selectedCategories
-        .map((cat) => `categories=${encodeURIComponent(cat)}`)
-        .join('&');
-      const response = await fetch(
-        `http://localhost:5121/books/allbooks?pageHowMany=${pageSize}&pageNum=${pageNum}&sortBy=${sortByTitle}${selectedCategories.length ? `&${categoryParams}` : ''}`
-      );
-      const data = await response.json();
-      setBooks(data.books);
-      setTotalItems(data.totalNumBooks);
+    const loadBooks = async () => {
+      try {
+        setLoading(true);
+        const data = await fetchBooks(
+          pageSize,
+          pageNum,
+          selectedCategories,
+          sortByTitle
+        );
+
+        setBooks(data.books);
+        setTotalItems(data.totalNumBooks);
+      } catch (error) {
+        setError((error as Error).message);
+      } finally {
+        setLoading(false);
+      }
+      loadBooks();
     };
-    fetchBooks();
   }, [pageSize, pageNum, totalItems, sortByTitle, selectedCategories]);
 
   useEffect(() => {
