@@ -20,10 +20,7 @@ export const fetchBooks = async (
       .join('&');
 
     const response = await fetch(
-      `${API_URL}/allbooks?pageHowMany=${pageSize}&pageNum=${pageNum}&sortBy=${sortByTitle}${selectedCategories.length ? `&${categoryParams}` : ''}`,
-      {
-        credentials: 'include',
-      }
+      `${API_URL}/allbooks?pageHowMany=${pageSize}&pageNum=${pageNum}&sortBy=${sortByTitle}${selectedCategories.length ? `&${categoryParams}` : ''}`
     );
 
     if (!response.ok) {
